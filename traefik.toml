@@ -1,0 +1,20 @@
+[consul]
+
+# Docker server endpoint. Can be a tcp or a unix socket endpoint.
+#
+# Required
+#
+endpoint = "consul:8500"
+
+# Default domain used.
+# Can be overridden by setting the "traefik.domain" label on a container.
+#
+# Required
+#
+prefix = "traefik"
+
+# Enable watch docker changes
+#
+# Optional
+#
+watch = true
