@@ -1,3 +1,13 @@
+[providers]
+  docker = true
+
+[api]
+  insecure = true
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
 [consul]
 
 # Docker server endpoint. Can be a tcp or a unix socket endpoint.
