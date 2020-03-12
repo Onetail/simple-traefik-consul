@@ -1,0 +1,48 @@
+version: "3.3"
+services:
+  consul:
+    image: consul
+    network_mode: bridge
+    container_name: consul
+    ports:
+      - 8500:8500
+    command: consul agent -data-dir=/tmp/consul -server -bootstrap -ui  -node=my_mac -bind=0.0.0.0 -client=0.0.0.0
+    labels:
+      - "traefik.port=8500"
+      - "traefik.enable=true"
+
+  registrator:
+    image: gliderlabs/registrator:master
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+    command: consul://127.0.0.1:8500
+    container_name: registrator
+    network_mode: host
+    restart: always
+    depends_on:
+      - consul
+  proxy:
+    image: traefik:v2.1
+    container_name: proxy
+    ports:
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $PWD/traefik.toml:/etc/traefik/traefik.toml
+    networks:
+      - traefik
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: containous/whoami
+    labels:
+      # - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+      # - "traefik.http.routers.whoami.entrypoints=web"
+    networks:
+      - traefik
+networks:
+  traefik:
+    external: true
