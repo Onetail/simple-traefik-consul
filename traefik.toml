@@ -8,7 +8,23 @@
   [entryPoints.web]
     address = ":80"
 
-[consul]
+[docker]
+
+# Enable watch docker changes
+#
+# Optional
+#
+watch = true
+
+[web]
+# Web administration port
+#
+# Required
+#
+address = ":8080"
+
+
+[consulCatalog]
 
 # Docker server endpoint. Can be a tcp or a unix socket endpoint.
 #
@@ -23,8 +39,5 @@ endpoint = "consul:8500"
 #
 prefix = "traefik"
 
-# Enable watch docker changes
-#
-# Optional
-#
 watch = true
+exposedbydefault = false
