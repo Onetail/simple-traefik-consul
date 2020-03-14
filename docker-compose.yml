@@ -5,7 +5,7 @@ services:
     container_name: consul
     ports:
       - 8500:8500
-    command: consul agent -data-dir=/tmp/consul -server -bootstrap -ui  -node=my_mac -bind=0.0.0.0 -client=0.0.0.0
+    command: consul agent -data-dir=/tmp/consul -server -bootstrap -ui  -node=WayneChu_nas -bind=0.0.0.0 -client=0.0.0.0
     labels:
       - traefik.enable=true
       - traefik.port=8500
@@ -29,7 +29,7 @@ services:
     restart: always
     container_name: proxy
     ports:
-      - "80:80"
+      - "3000:80"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
