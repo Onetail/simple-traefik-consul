@@ -41,6 +41,7 @@ services:
       - "3000:80"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
+    command: -c /dev/null --api --logLevel=DEBUG --consulcatalog.endpoint=waynechu.synology.me:8500
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
@@ -48,11 +49,12 @@ services:
     depends_on:
       - consul
     labels:
-      - traefik.frontend.rule=Host:127.0.0.1
+      - traefik.http.routers.traefik.rule=Host(`localhost`)"
       - traefik.enable=true
       - traefik.port=8080
       - traefik.tags=webgateway
       - traefik.docker.network=traefik
+      - SERVICE_TAGS=traefik.enable=false
     networks:
       - traefik
   # whoami:
