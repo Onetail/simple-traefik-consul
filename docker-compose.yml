@@ -14,7 +14,7 @@ services:
       - 8600:8600
       - 8600:8600/udp
       - 8500:8500
-    command: consul agent -data-dir=/tmp/consul -server -bootstrap-expect=1 -ui  -node=WayneChu_nas -bind=0.0.0.0 -client=0.0.0.0
+    command: consul agent -data-dir=/tmp/consul -server -bootstrap-expect=2 -ui  -node=WayneChu_nas -bind=0.0.0.0 -client=0.0.0.0
     labels:
       - traefik.enable=true
       - traefik.port=8500
