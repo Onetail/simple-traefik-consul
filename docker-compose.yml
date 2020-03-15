@@ -18,7 +18,6 @@ services:
     labels:
       - traefik.enable=true
       - traefik.port=8500
-      - traefik.tags=consulTag
       - traefik.docker.network=traefik
     networks:
       - traefik
@@ -49,10 +48,8 @@ services:
     depends_on:
       - consul
     labels:
-      - traefik.http.routers.traefik.rule=Host(`localhost`)"
       - traefik.enable=true
       - traefik.port=8080
-      - traefik.tags=webgateway
       - traefik.docker.network=traefik
       - SERVICE_TAGS=traefik.enable=false
     networks:

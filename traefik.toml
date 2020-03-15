@@ -1,3 +1,4 @@
+# defaultEntryPoints = ["https","http"]
 [providers]
   docker = true
 
@@ -7,6 +8,13 @@
 [entryPoints]
   [entryPoints.web]
     address = ":80"
+#     [entryPoints.http.redirect]
+#     entryPoint = "https"
+#   [entryPoints.https]
+#   address = ":443"
+#   [entryPoints.https.tls]
+
+
 
 [docker]
 
@@ -39,5 +47,13 @@ endpoint = "consul:8500"
 #
 prefix = "traefik"
 
-watch = true
+domain = "waynechu.synology.me"
 exposedbydefault = false
+
+# [acme]
+# email = "paosong91@gmail.com"
+# storage = "acme.json"
+# entryPoint = "https"
+# onHostRule = true
+# [acme.httpChallenge]
+# entryPoint = "http"
